@@ -3,7 +3,7 @@ import React from 'react';
 const CharComponent = (props) => {
     return (
 
-        <p>{props.ch}</p>
+        <p onClick={props.click}>{props.ch}</p>
 
     );
 }

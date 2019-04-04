@@ -20,6 +20,17 @@ class App extends Component {
     );
   }
 
+  deleteText = (index) => {
+    console.log("index : " + index);
+    // Get the current text
+    let prevTextArray = [...this.state.text]
+    prevTextArray.splice(index,1);
+    this.setState({
+      text : prevTextArray.join("")
+    });
+
+  }
+
   render() {
     // For rendering ValidationComponent
     let output = null;
@@ -31,8 +42,8 @@ class App extends Component {
     }
 
     let printthis = (    
-            [...this.state.text].map(c => 
-              <CharComponent ch={c}/>
+            [...this.state.text].map((c,index) => 
+              <CharComponent ch={c} click = {() => this.deleteText(index)} key={index}/>
             )
     );
 
@@ -47,9 +58,7 @@ class App extends Component {
           <li>When you click a CharComponent, it should be removed from the entered text.</li>
         </ol>
         <p>Hint: Keep in mind that JavaScript strings are basically arrays!</p>
-
-        <input type="text" id="text-id" onChange={this.onChangeListener}/>
-
+        <input type="text" id="text-id" onChange={this.onChangeListener} value={this.state.text}/>
         <p> The length of the text entered : {this.state.textLength}</p>
         <ValidationComponent output={output}/>
         {printthis}    
